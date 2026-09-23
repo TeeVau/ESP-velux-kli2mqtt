@@ -24,13 +24,13 @@ The contact numbers refer to the five pads in the KLI PCB photo from Chris
 Bue's [KLI 313 ESP8266 project](https://www.chrisbue.de/velux-esp8266-smart-home-mqtt/).
 They are a practical layout reference, not labels printed by VELUX.
 
-| Wemos D1 mini | KLI contact                 | Pull-up        | Function         |
-| ------------- | --------------------------- | -------------- | ---------------- |
-| 3V3           | 2 — battery positive        | —              | KLI supply       |
-| GND           | 1 — battery negative/common | —              | Shared reference |
-| D5 / GPIO14   | 3 — OPEN                    | 10 kOhm to 3V3 | OPEN             |
-| D6 / GPIO12   | 4 — STOP                    | 10 kOhm to 3V3 | STOP             |
-| D7 / GPIO13   | 5 — CLOSE                   | 10 kOhm to 3V3 | CLOSE            |
+| Wemos D1 mini | KLI contact                 | Pull-up        | Function         | Wire colour |
+| ------------- | --------------------------- | -------------- | ---------------- | ----------- |
+| 3V3           | 2 — battery positive        | —              | KLI supply       | Red         |
+| GND           | 1 — battery negative/common | —              | Shared reference | Black       |
+| D5 / GPIO14   | 3 — OPEN                    | 10 kOhm to 3V3 | OPEN             | Blue        |
+| D6 / GPIO12   | 4 — STOP                    | 10 kOhm to 3V3 | STOP             | Yellow      |
+| D7 / GPIO13   | 5 — CLOSE                   | 10 kOhm to 3V3 | CLOSE            | Turquoise   |
 
 Each command pin has a 10 kOhm pull-up to 3V3. Firmware pulls the selected
 line LOW for 200 ms and otherwise leaves it at high impedance. Do not use a
@@ -42,14 +42,6 @@ during boot, reset and firmware upload.
 The photographed unit uses direct soldered wires, three pull-ups fitted at the
 Wemos and a 3D-printed replacement back cover. Wire colours are only an
 assembly aid; the mapping above is authoritative.
-
-| Wire colour | Installed connection             |
-| ----------- | -------------------------------- |
-| Black       | KLI contact 1 / Wemos GND        |
-| Red         | KLI contact 2 / Wemos 3V3        |
-| Blue        | KLI contact 3 / Wemos D5 (OPEN)  |
-| Yellow      | KLI contact 4 / Wemos D6 (STOP)  |
-| Turquoise   | KLI contact 5 / Wemos D7 (CLOSE) |
 
 ![KLI PCB before modification](../assets/kli-pcb-before-modification.jpg)
 
