@@ -6,4 +6,6 @@ firmware version.
 
 This project intentionally exposes unauthenticated HTTP OTA only while a
 trusted MQTT broker has opened a short-lived local-network window. Deploy it
-only on a trusted network with protected MQTT credentials.
+only on a trusted network with protected MQTT credentials. Never publish
+`secrets.h`, broker details, unredacted serial logs, private network addresses
+or photos with location metadata.

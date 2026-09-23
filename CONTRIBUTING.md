@@ -1,11 +1,13 @@
 # Contributing
 
-Please keep changes small, documented and buildable for
+Please keep changes focused, documented and buildable for
 `esp8266:esp8266:d1_mini`.
 
-1. Never commit `secrets.h`, broker credentials, IP addresses, or live logs.
-2. Update the FSD, phase plan and verification log when behaviour changes.
-3. Run `scripts/build.ps1` and `tests/run-static-checks.ps1` before a pull
+1. Never commit `secrets.h`, credentials, IP addresses, GPS-tagged photos or
+   live logs.
+2. Run `scripts/build.ps1` and `tests/run-static-checks.ps1` before a pull
    request.
-4. Do not claim electrical or shutter-motion verification without recorded
-   hardware evidence.
+3. Update the README, wiring reference or installation record when behaviour
+   or the tested hardware changes.
+4. Clearly separate bridge-level command confirmation from observed shutter
+   movement, and state the KLI revision used for hardware reports.

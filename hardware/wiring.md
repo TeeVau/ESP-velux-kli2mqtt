@@ -1,14 +1,13 @@
-# v0.1.0 Wiring Reference
+# Wiring Reference
 
 Disconnect USB power and remove the KLI batteries before soldering. This is a
 reference for a KLI 313-compatible board, not a guarantee for every remote
 revision.
 
-![Wemos D1 mini to KLI 313 wiring](wiring.svg)
-
-The contact numbers refer to the five pads in the KLI PCB photo in the
-external [KLI 313 ESP8266 project](https://www.chrisbue.de/velux-esp8266-smart-home-mqtt/).
-They are a practical board-layout reference, not labels printed by VELUX.
+The contact numbers refer to the five pads in the KLI PCB photo in the external
+[KLI 313 ESP8266 project](https://www.chrisbue.de/velux-esp8266-smart-home-mqtt/).
+Use that photo to find the pads; the numbers are a practical board-layout
+reference, not labels printed by VELUX.
 
 | Wemos D1 mini | KLI contact | External part | Meaning |
 |---|---|---|---|
@@ -23,8 +22,22 @@ booting, resetting, or being updated. Do not connect a GPIO to a KLI button
 line as a push-pull high output. Firmware releases a button by returning its
 GPIO to input/high impedance.
 
-For a reversible spring-contact and printed-holder approach, see the external
-[KLI 313 ESP8266 project](https://www.chrisbue.de/velux-esp8266-smart-home-mqtt/).
+## Installed build
+
+The photographed reference build uses direct soldered wires and three 10 kOhm
+pull-ups soldered at the Wemos. Wire colours are only an assembly aid; use the
+table above as the electrical source of truth.
+
+| Wire colour | Installed connection |
+|---|---|
+| Black | KLI contact 1 / Wemos GND |
+| Red | KLI contact 2 / Wemos 3V3 |
+| Blue | KLI contact 3 / Wemos D5 (OPEN) |
+| Yellow | KLI contact 4 / Wemos D6 (STOP) |
+| Turquoise | KLI contact 5 / Wemos D7 (CLOSE) |
+
+See the [installation record](../docs/INSTALLATION.md) for
+the photos of this build and the fitted cover.
 
 ## Bill of materials
 
