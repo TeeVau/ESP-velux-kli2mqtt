@@ -1,0 +1,5 @@
+.arduino-build/
+bin/
+firmware/velux_kli2mqtt/secrets.h
+*.local.h
+*.log
