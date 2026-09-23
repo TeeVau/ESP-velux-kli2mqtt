@@ -28,7 +28,6 @@ uint32_t releaseAtMs = 0;
 uint32_t cooldownUntilMs = 0;
 uint32_t lastWifiAttemptMs = 0;
 uint32_t lastMqttAttemptMs = 0;
-uint32_t lastStatusPublishMs = 0;
 uint32_t otaExpiresAtMs = 0;
 uint32_t restartAtMs = 0;
 bool otaUploadFailed = false;
@@ -197,17 +196,18 @@ void publishStatus() {
   if (!mqtt.connected()) {
     return;
   }
-  char value[16];
   publish("/availability", "online");
   publish("/last_command", lastCommand);
+  char value[16];
   snprintf(value, sizeof(value), "%d", WiFi.RSSI());
   publish("/rssi_dbm", value);
-  snprintf(value, sizeof(value), "%lu", millis() / 1000UL);
-  publish("/uptime_s", value);
-  snprintf(value, sizeof(value), "%u", ESP.getFreeHeap());
-  publish("/free_heap_bytes", value);
   publish("/firmware_version", VK_FIRMWARE_VERSION);
   publishOtaState();
+}
+
+void clearLegacyTelemetry() {
+  publish("/uptime_s", "");
+  publish("/free_heap_bytes", "");
 }
 
 void stopOta(OtaState state) {
@@ -355,6 +355,7 @@ void updateMqtt() {
   mqtt.subscribe(topic("/set").c_str());
   mqtt.subscribe(topic("/ota/set").c_str());
   Serial.println(F("[mqtt] connected"));
+  clearLegacyTelemetry();
   publishStatus();
 #endif
 }
@@ -390,10 +391,6 @@ void loop() {
   updateMqtt();
   if (mqtt.connected()) {
     mqtt.loop();
-    if (static_cast<int32_t>(millis() - lastStatusPublishMs) >= 0) {
-      lastStatusPublishMs = millis() + kStatusIntervalMs;
-      publishStatus();
-    }
   }
   updateOta();
 }

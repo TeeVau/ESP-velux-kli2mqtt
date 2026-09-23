@@ -10,6 +10,8 @@
 | 2026-09-22 | 3 | MQTT button commands | PASS (bridge) | Non-retained `OPEN`, `STOP`, `CLOSE` each immediately updated retained `last_command` to the matching value. |
 | 2026-09-22 | 3 | MQTT-enabled OTA | PASS | v0.1.0 armed its temporary HTTP endpoint, accepted the equal project version, rebooted and republished v0.1.0. |
 | 2026-09-23 | 3 | Physical hardware acceptance | PASS | User confirmed: no unintended action after reset; OPEN, STOP and CLOSE moved the target as expected; the original KLI buttons remain functional. |
+| 2026-09-23 | 4 | Lean MQTT telemetry build | PASS | v0.1.2 compiled for `esp8266:esp8266:d1_mini`; 313,189 B flash (29%), 29,556 B RAM (36%); SHA-256 recorded below. |
+| 2026-09-23 | 4 | Lean MQTT telemetry OTA | PASS | MQTT OTA upgraded v0.1.0/0.1.1 to v0.1.2; retained RSSI remained available and removed uptime/free-heap topics timed out after reconnect. |
 
 ## Validation boundary
 
@@ -18,3 +20,8 @@ unwanted action after reset, correct OPEN/STOP/CLOSE behaviour, and continued
 manual KLI operation. The acceptance does not generalise to untested KLI PCB
 revisions. An oscilloscope-level GPIO/pad timing measurement remains optional,
 not a release blocker for this installed device.
+
+## Latest release artifact
+
+`esp-velux-kli2mqtt-0.1.2.bin` has SHA-256
+`D9696C7C3D46AF1615AAB59298084A08B3D09373D1350C4033878B314B270801`.

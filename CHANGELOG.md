@@ -2,6 +2,21 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.1.2] - 2026-09-23
+
+### Fixed
+
+- Clear obsolete retained uptime and free-heap values after upgrading from
+  v0.1.0, so brokers do not retain stale diagnostics.
+
+## [0.1.1] - 2026-09-23
+
+### Changed
+
+- Removed retained uptime and free-heap MQTT telemetry.
+- RSSI is retained when MQTT connects; functional state is published when it
+  changes rather than periodically.
+
 ## [0.1.0] - 2026-09-22
 
 ### Added

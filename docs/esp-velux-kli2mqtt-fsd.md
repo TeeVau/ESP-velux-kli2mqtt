@@ -104,7 +104,8 @@ available; all live observations are recorded instead of inferred.
 - **FR-1.8 [Must]:** The MQTT client shall publish an offline retained Last
   Will and an online retained availability value when connected.
 - **FR-1.9 [Should]:** The firmware shall publish retained last command, RSSI,
-  uptime, free heap, firmware version and OTA status diagnostics.
+  firmware version and OTA status. It shall not publish periodic uptime or free
+  heap telemetry; it shall clear retained legacy values on MQTT connection.
 - **FR-1.10 [Must]:** A valid OTA enable command shall open a temporary 60 s
   HTTP upload endpoint and shall close it after one upload, cancel, timeout, or
   reboot.
@@ -162,8 +163,6 @@ local `secrets.h` without changing source.
 | `/availability` | device -> broker | yes | `online`, `offline` |
 | `/last_command` | device -> broker | yes | last accepted action |
 | `/rssi_dbm` | device -> broker | yes | signed integer |
-| `/uptime_s` | device -> broker | yes | unsigned integer |
-| `/free_heap_bytes` | device -> broker | yes | unsigned integer |
 | `/firmware_version` | device -> broker | yes | semantic version |
 | `/ota/status` | device -> broker | yes | `disabled`, `armed`, `uploading`, `succeeded`, `failed`, `timed_out` |
 | `/ota/upload_url` | device -> broker | yes | temporary HTTP URL or empty |
@@ -172,6 +171,10 @@ All messages use QoS 0. `availability=offline` is the retained MQTT Last Will.
 The command topics deliberately carry no acknowledgement beyond
 `last_command`, which means *the local KLI contact was pressed*, not that a
 shutter moved.
+
+On MQTT connection, v0.1.2 clears retained `/uptime_s` and
+`/free_heap_bytes` values left by v0.1.0. They are legacy cleanup only and are
+not part of the interface.
 
 ### 6.2 HTTP OTA interface
 
@@ -257,7 +260,7 @@ factory reset state to preserve.
 
 | Constant | Value |
 |---|---|
-| Firmware version | `0.1.0` |
+| Firmware version | `0.1.2` |
 | Button press | 200 ms |
 | Command cooldown | 700 ms |
 | OTA window | 60 s |

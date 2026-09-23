@@ -64,13 +64,18 @@ The root topic defaults to `velux/rollladen` and may be changed in local
 | `<root>/ota/set` | to device | **no** | `ENABLE`, `CANCEL` |
 | `<root>/availability` | from device | yes | `online`, `offline` |
 | `<root>/last_command` | from device | yes | last accepted button press |
-| `<root>/rssi_dbm`, `/uptime_s`, `/free_heap_bytes` | from device | yes | diagnostics |
+| `<root>/rssi_dbm` | from device | yes | RSSI on MQTT connection |
 | `<root>/firmware_version` | from device | yes | installed version |
 | `<root>/ota/status`, `/ota/upload_url` | from device | yes | OTA state and temporary URL |
 
 `last_command` confirms only that the ESP pressed a KLI contact. It does not
 prove that a shutter moved. Do **not** retain either set topic: an MQTT 3.x
 ESP8266 client cannot safely distinguish a retained command replay.
+
+Uptime and free heap are deliberately not MQTT topics. They are development
+details without operational value for this bridge; RSSI remains available for
+occasional Wi-Fi diagnosis. v0.1.2 clears retained values for the two removed
+topics on its next MQTT connection.
 
 Commands are 200 ms pulses. During a pulse/cooldown, OPEN/CLOSE are discarded;
 STOP replaces a pending movement command and is executed next.

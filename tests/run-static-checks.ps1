@@ -8,7 +8,8 @@ $checks = @(
   @{ Name = "No blocking delay"; Pass = $source -notmatch '\bdelay\s*\(' },
   @{ Name = "Open-drain actuation"; Pass = $source -match 'OUTPUT_OPEN_DRAIN' -and $source -match 'pinMode\(activePin, INPUT\)' },
   @{ Name = "STOP priority"; Pass = $source -match 'command == Command::kStop' -and $source -match 'pendingCommand = Command::kStop' },
-  @{ Name = "OTA version policy"; Pass = $source -match 'isSameOrNewerVersion' -and $source -match 'X-Firmware-Project' }
+  @{ Name = "OTA version policy"; Pass = $source -match 'isSameOrNewerVersion' -and $source -match 'X-Firmware-Project' },
+  @{ Name = "No periodic technical telemetry"; Pass = $source -notmatch 'millis\(\) / 1000UL' -and $source -notmatch 'ESP\.getFreeHeap\(\)' -and $source -notmatch 'kStatusIntervalMs' }
 )
 
 $failed = @($checks | Where-Object { -not $_.Pass })
