@@ -1,5 +1,7 @@
 # ESP-velux-kli2mqtt
 
+![ESP-velux-kli2mqtt banner](assets/github-banner.png)
+
 An ESP8266 adds MQTT inputs to a paired VELUX KLI remote. It does not speak
 io-homecontrol: the KLI remains the radio endpoint. The ESP only closes the
 three button contacts for OPEN, STOP and CLOSE.
