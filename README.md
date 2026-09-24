@@ -23,6 +23,9 @@ The reference build is a Wemos D1 mini, a paired KLI 313-compatible remote,
 three 10 kOhm pull-ups and USB power. Its electrical mapping, BOM, build photos
 and assembly notes are in [Hardware](docs/HARDWARE.md).
 
+The 3D-printed [replacement back cover](https://www.thingiverse.com/thing:6427196)
+used by the reference build is also by Chris Bue.
+
 ## Build and USB flash
 
 Install the ESP8266 board package and [PubSubClient](https://github.com/knolleary/pubsubclient), then create the local configuration file:
